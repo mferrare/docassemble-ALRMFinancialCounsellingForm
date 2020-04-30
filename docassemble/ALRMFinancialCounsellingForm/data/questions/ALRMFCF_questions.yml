@@ -1,0 +1,96 @@
+---
+objects:
+  - clients: DAList.using(object_type=Individual)
+---
+# Client 1 on the form
+question: Client ${ i + 1 } Personal Information
+subquestion: |
+  Explanation to go here, including a link to a relevant privacy policy
+fields:
+  - First name: clients[i].name.first
+  - Middle name: clients[i].name.middle
+    required: False
+  - Surname: clients[i].name.last
+  - Date of birth: clients[i].birthdate
+    datatype: date
+  - Gender: clients[i].gender
+    datatype: radio
+    choices:
+      - Male: male
+      - Female: female
+      - Other: other
+  - Number of years living in SA: clients[i].years_in_sa
+    datatype: integer
+  - Do you identify as Aboriginal or Torres Strait Islander?: clients[i].atsi_status
+    datatype: yesnoradio
+  - Do you hold a Health Care or Pensioner Concession Card?: clients[i].concession_card
+    datatype: yesnoradio
+  - Income type: clients[i].income_type
+---
+# Ask client 1 (clients[0]) if they have a partner
+question: Second applicant question
+subquestion: |
+  ${ clients[0].name }, is there someone else applying with you?
+fields:
+  - no label: clients[0].has_partner
+    datatype: yesnoradio
+---
+# Ask client 2 what is their relationship to client 1
+question: Relationship to ${ clients[0].name }
+subquestion: |
+  Please indicate your relationship to ${ clients[i-1].name }
+fields:
+  - no label: clients[i].relationship
+---
+question: Number of children
+subquestion: |
+  How many children in your household?
+fields:
+  - no label: MJFnum_children
+    datatype: integer
+---
+question: Type of Accommodation
+subquestion: |
+  Please indicate your current accommodation
+fields:
+  - Accommodation type: MJFaccommodation
+    datatype: radio
+    choices:
+      - Boarding
+      - Community housing
+      - Couch surfing
+      - Housing SA
+      - Owned outright
+      - Owned with a mortgage
+      - Private rental
+      - Residential park
+      - Sleeping rough
+      - Supportive
+      - Transitional
+  - Your current suburb: MJFsuburb
+  - Your current postcode: MJFpostcode
+---
+question: Further contact
+subquestion: |
+  Please indicate whether you are willing to be contacted later for evaluation
+  of this service 
+  **Note:** You are still able to receive this service if you choose *No*.
+fields:
+  - I am willing to be contacted: MJFwilling_contact
+    datatype: yesnoradio
+  - Contact email: MJFcontact_email
+    datatype: email
+    show if:
+      variable: MJFwilling_contact
+      is: True
+  - Contact phone: MJFcontact_phone
+    show if:
+      variable: MJFwilling_contact
+      is: True
+---
+question: Financial Counsellor
+subquestion: |
+  If you know the name of your financial counsellor, please enter it here
+fields:
+  - no label: MJFfinancial_counsellor_name
+---
