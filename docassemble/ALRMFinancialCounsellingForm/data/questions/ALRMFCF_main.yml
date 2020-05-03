@@ -26,72 +26,33 @@ buttons:
 mandatory: true
 question: Please download your form
 subquestion: |
-  Your form is now available for download.  Please click on the **PDF** link below
-  to download a copy of your form for you to sign.  You can also email a copy to
-  yourself or to someone else using the email form below.
+  Here is a preview of your form.
+  
+  ${ ALRMFCF_attachment }
 
-  $ALRMFCF_attachment}
-under: |
-  Here is a summary of the information you entered
-  
-  **Your Information**
-  
-  Information|You Entered
-  ---|---
-  Your name|${clients[0].name}
-  Your date of birth|${clients[0].birthdate}
-  Gender|${clients[0].gender}
-  Number of years living in SA|${clients[0].years_in_sa}
-  Aboriginal or Torres Strait Islander|${clients[0].atsi_status}
-  Health care/pension card|${clients[0].concession_card}
-  Income task|${clients[0].income_type}
-  
-  %if clients[0].has_partner:
-  <hr>  
-  **Second applicant's information**
-  
-  Information|You Entered
-  ---|---
-  Your name|${clients[1].name}
-  Your date of birth|${clients[1].birthdate}
-  Gender|${clients[1].gender}
-  Number of years living in SA|${clients[1].years_in_sa}
-  Aboriginal or Torres Strait Islander|${clients[1].atsi_status}
-  Health care/pension card|${clients[1].concession_card}
-  Income task|${clients[1].income_type}
-  Relationship to ${clients[0].name}|${clients[1].relationship}
-  
-  %endif
-  
-  <hr>
-  **Additional Information**
-  
-  Information|You Entered
-  ---|---
-  Number of children in household|${ MJFnum_children }
-  Type of accommodation|${ MJFaccommodation }
-  Your current suburb (and postcode)| ${MJFsuburb} (${MJFpostcode})
-  
-  <hr>
-  **Contact Information**
-  
-  %if MJFwilling_contact:
-  You have indicated you are willing to be contacted for evaluation of this service.
-  
-  Information|You Entered
-  ---|---
-  Contact email|${MJFcontact_email}
-  Contact phone|${MJFcontact_phone}
-  
-  %else:
-  You have indicated that you are not willing to be contacted for evaluation
-  of this service 
-  (You are still able to receive this service)
-  %endif
+  Your form is available for download as 
+  a [PDF](${ALRMFCF_attachment.pdf.url_for()}).  There are additional
+  download and email options at the end of this webpage
+attachment code: |
+  ALRMFCF_attachment
 buttons:
   - Exit: exit
     url: https://www.alrm.org.au
   - Restart: restart
-  
-  
-  
+---
+# We populate partner details using client[1] so we can re-use
+# the question block but we store the output in partner
+code: |
+  if clients[0].has_partner:
+    partner = clients[1]
+  else:
+    partner = DAEmpty()
+---
+# Deal with when contact details are not selected
+code: |
+  if MJFwilling_contact:
+    PDFcontact_email = MJFcontact_email
+    PDFcontact_phone = MJFcontact_phone
+  else:
+    PDFcontact_email = ''
+    PDFcontact_phone = ''

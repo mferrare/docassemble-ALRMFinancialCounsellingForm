@@ -1,6 +1,7 @@
 ---
 objects:
   - clients: DAList.using(object_type=Individual)
+  - partner: Individual
 ---
 # Client 1 on the form
 question: Client ${ i + 1 } Personal Information
@@ -8,24 +9,33 @@ subquestion: |
   Explanation to go here, including a link to a relevant privacy policy
 fields:
   - First name: clients[i].name.first
+    default: John
   - Middle name: clients[i].name.middle
     required: False
+    default: Wayne
   - Surname: clients[i].name.last
+    default: Smith
   - Date of birth: clients[i].birthdate
     datatype: date
+    default: 2001-01-01
   - Gender: clients[i].gender
     datatype: radio
     choices:
       - Male: male
       - Female: female
       - Other: other
+    default: male
   - Number of years living in SA: clients[i].years_in_sa
     datatype: integer
+    default: 16
   - Do you identify as Aboriginal or Torres Strait Islander?: clients[i].atsi_status
     datatype: yesnoradio
+    default: False
   - Do you hold a Health Care or Pensioner Concession Card?: clients[i].concession_card
     datatype: yesnoradio
+    default: True
   - Income type: clients[i].income_type
+    default: Employed
 ---
 # Ask client 1 (clients[0]) if they have a partner
 question: Second applicant question
@@ -36,11 +46,12 @@ fields:
     datatype: yesnoradio
 ---
 # Ask client 2 what is their relationship to client 1
-question: Relationship to ${ clients[0].name }
+question: Relationship to ${ clients[i-1].name }
 subquestion: |
   Please indicate your relationship to ${ clients[i-1].name }
 fields:
   - no label: clients[i].relationship
+    default: Wifey
 ---
 question: Number of children
 subquestion: |
@@ -48,6 +59,7 @@ subquestion: |
 fields:
   - no label: MJFnum_children
     datatype: integer
+    default: 3
 ---
 question: Type of Accommodation
 subquestion: |
@@ -67,8 +79,11 @@ fields:
       - Sleeping rough
       - Supportive
       - Transitional
+    default: Supportive
   - Your current suburb: MJFsuburb
+    default: Newcrest
   - Your current postcode: MJFpostcode
+    default: 5133
 ---
 question: Further contact
 subquestion: |
@@ -78,6 +93,7 @@ subquestion: |
 fields:
   - I am willing to be contacted: MJFwilling_contact
     datatype: yesnoradio
+    default: False
   - Contact email: MJFcontact_email
     datatype: email
     show if:
@@ -93,4 +109,5 @@ subquestion: |
   If you know the name of your financial counsellor, please enter it here
 fields:
   - no label: MJFfinancial_counsellor_name
+    default: "Fin Counsellor"
 ---

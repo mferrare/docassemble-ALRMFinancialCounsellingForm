@@ -3,29 +3,31 @@ attachment:
     variable name: ALRMFCF_attachment
     name: Wyatt - ALRM Financial Counselling Consent Form
     filename: Wyatt_ALRM_Financial_Counselling_Consent_Form
-    pdf template file: ALRMFCF_attachment.pdf
+    pdf template file: ALRMFCF_form.pdf
+    allow downloading: True
+    allow emailing: True
     fields: 
       - "cb_g0_male": ${ clients[0].gender == 'male' }
       - "cb_g0_female": ${ clients[0].gender == 'female' }
       - "cb_g0_other": ${ clients[0].gender == 'other' }
       - "Text1": ${ clients[0].name.last }
       - "Text2": ${ '{} {}'.format(clients[0].name.first, clients[0].name.middle) }
-      - "Text3": ${ datetime_format(clients[0].birthdate, format='dd MMM YYYY')}
+      - "Text3": ${ format_date(clients[0].birthdate, format='dd MMM YYYY')}
       - "Text4": ${ clients[0].years_in_sa }
       - "cb_c0_yes": ${ clients[0].concession_card == True }
       - "cb_c0_no": ${ clients[0].concession_card == False }
-      - "Text11": ${ clients[1].income_type }
-      - "cb_g1_male": ${ clients[1].gender == 'male' }
-      - "cb_g1_female": ${ clients[1].gender == 'female' }
-      - "cb_g1_other": ${ clients[1].gender == 'other' }
-      - "Text5": ${ clients[1].name.last }
-      - "Text6": ${ '{} {}'.format(clients[1].name.first, clients[1].name.middle) }
-      - "Text7": ${ datetime_format(clients[1].birthdate, format='dd MMM YYYY')}
-      - "Text8": ${ clients[1].relationship}
-      - "Text9": ${ clients[1].years_in_sa }
-      - "cb_a1_yes": ${ clients[1].concession_card == True }
-      - "cb_a1_no": ${ clients[1].concession_card == False }
-      - "Text10": ${ clients[1].income_type }
+      - "Text11": ${ partner.income_type }
+      - "cb_g1_male": ${ partner.gender == 'male' }
+      - "cb_g1_female": ${ partner.gender == 'female' }
+      - "cb_g1_other": ${ partner.gender == 'other' }
+      - "Text5": ${ partner.name.last }
+      - "Text6": ${ '{} {}'.format(partner.name.first, partner.name.middle) }
+      - "Text7": ${ format_date(partner.birthdate, format='dd MMM YYYY')}
+      - "Text8": ${ partner.relationship}
+      - "Text9": ${ partner.years_in_sa }
+      - "cb_a1_yes": ${ partner.concession_card == True }
+      - "cb_a1_no": ${ partner.concession_card == False }
+      - "Text10": ${ partner.income_type }
       - "Text22": ${ str(MJFnum_children)}
       - "cb_boarding": ${ MJFaccommodation == 'Boarding'}
       - "cb_community_housing": ${ MJFaccommodation == 'Community housing'}
@@ -42,5 +44,5 @@ attachment:
       - "Suburb": ${MJFsuburb}
       - "cb_eval_yes": ${ MJFwilling_contact == True}
       - "cb_eval_no": ${MJFwilling_contact == False}
-      - "Email": ${ MJFcontact_email }
-      - "Phone": ${ MJFcontact_phone }
+      - "Email": ${ PDFcontact_email }
+      - "Phone": ${ PDFcontact_phone }
