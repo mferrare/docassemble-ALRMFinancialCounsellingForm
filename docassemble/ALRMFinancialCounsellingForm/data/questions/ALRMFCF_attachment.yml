@@ -16,7 +16,7 @@ attachment:
       - "Text4": ${ clients[0].years_in_sa }
       - "cb_c0_yes": ${ clients[0].concession_card == True }
       - "cb_c0_no": ${ clients[0].concession_card == False }
-      - "Text11": ${ partner.income_type }
+      - "Text11": ${ clients[0].income_type }
       - "cb_g1_male": ${ partner.gender == 'male' }
       - "cb_g1_female": ${ partner.gender == 'female' }
       - "cb_g1_other": ${ partner.gender == 'other' }
@@ -25,8 +25,8 @@ attachment:
       - "Text7": ${ format_date(partner.birthdate, format='dd MMM YYYY')}
       - "Text8": ${ partner.relationship}
       - "Text9": ${ partner.years_in_sa }
-      - "cb_a1_yes": ${ partner.concession_card == True }
-      - "cb_a1_no": ${ partner.concession_card == False }
+      - "cb_c1_yes": ${ partner.concession_card == True }
+      - "cb_c1_no": ${ partner.concession_card == False }
       - "Text10": ${ partner.income_type }
       - "Text22": ${ str(MJFnum_children)}
       - "cb_boarding": ${ MJFaccommodation == 'Boarding'}
