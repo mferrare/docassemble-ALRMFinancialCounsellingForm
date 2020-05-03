@@ -43,14 +43,14 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
     return out
 
 setup(name='docassemble.ALRMFinancialCounsellingForm',
-      version='0.0.1',
-      description=('A docassemble extension.'),
-      long_description='# docassemble.ALRMFinancialCounsellingForm\n\nA docassemble extension.\n\n## Author\n\nMark Ferraretto, mark@ferraretto.com\n\n',
+      version='0.5.0',
+      description=('Automated ALRM-Wyatt Financial Counselling Form'),
+      long_description='# Wyatt - ALRM Financial Counselling Consent Form\r\n\r\nA Docassemble interview to automate the preparation of a this form.\r\n\r\nCurrently this app:\r\n\r\n- asks the user the questions on the form\r\n- populates a PDF with the supplied answers\r\n- makes PDF available for download and/or email\r\n\r\nFuture versions will:\r\n\r\n- record interviews in a database for reporting purposes\r\n- allow for bulk imports of data into the database',
       long_description_content_type='text/markdown',
       author='Mark Ferraretto',
       author_email='mark@ferraretto.com',
       license='The MIT License (MIT)',
-      url='https://docassemble.org',
+      url='https://www.alrm.org.au',
       packages=find_packages(),
       namespace_packages=['docassemble'],
       install_requires=[],
