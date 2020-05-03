@@ -1,6 +1,7 @@
 ---
 include:
   - ALRMFCF_questions.yml
+  - ALRMFCF_attachment.yml
 ---
 mandatory: True
 question: Wyatt - ALRM
@@ -28,8 +29,8 @@ subquestion: |
   Your form is now available for download.  Please click on the **PDF** link below
   to download a copy of your form for you to sign.  You can also email a copy to
   yourself or to someone else using the email form below.
-  
-  **Link to PDF form to go here***
+
+  $ALRMFCF_attachment}
 under: |
   Here is a summary of the information you entered
   

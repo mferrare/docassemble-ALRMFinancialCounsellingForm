@@ -1,0 +1,46 @@
+---
+attachment:
+    variable name: ALRMFCF_attachment
+    name: Wyatt - ALRM Financial Counselling Consent Form
+    filename: Wyatt_ALRM_Financial_Counselling_Consent_Form
+    pdf template file: ALRMFCF_attachment.pdf
+    fields: 
+      - "cb_g0_male": ${ clients[0].gender == 'male' }
+      - "cb_g0_female": ${ clients[0].gender == 'female' }
+      - "cb_g0_other": ${ clients[0].gender == 'other' }
+      - "Text1": ${ clients[0].name.last }
+      - "Text2": ${ '{} {}'.format(clients[0].name.first, clients[0].name.middle) }
+      - "Text3": ${ datetime_format(clients[0].birthdate, format='dd MMM YYYY')}
+      - "Text4": ${ clients[0].years_in_sa }
+      - "cb_c0_yes": ${ clients[0].concession_card == True }
+      - "cb_c0_no": ${ clients[0].concession_card == False }
+      - "Text11": ${ clients[1].income_type }
+      - "cb_g1_male": ${ clients[1].gender == 'male' }
+      - "cb_g1_female": ${ clients[1].gender == 'female' }
+      - "cb_g1_other": ${ clients[1].gender == 'other' }
+      - "Text5": ${ clients[1].name.last }
+      - "Text6": ${ '{} {}'.format(clients[1].name.first, clients[1].name.middle) }
+      - "Text7": ${ datetime_format(clients[1].birthdate, format='dd MMM YYYY')}
+      - "Text8": ${ clients[1].relationship}
+      - "Text9": ${ clients[1].years_in_sa }
+      - "cb_a1_yes": ${ clients[1].concession_card == True }
+      - "cb_a1_no": ${ clients[1].concession_card == False }
+      - "Text10": ${ clients[1].income_type }
+      - "Text22": ${ str(MJFnum_children)}
+      - "cb_boarding": ${ MJFaccommodation == 'Boarding'}
+      - "cb_community_housing": ${ MJFaccommodation == 'Community housing'}
+      - "cb_couch_surfing": ${ MJFaccommodation == 'Couch surfing'}
+      - "cb_housing_sa": ${ MJFaccommodation == 'Housing SA'}
+      - "cb_owned_outright": ${ MJFaccommodation == 'Owned outright'}
+      - "cb_owned_with_mortgage": ${ MJFaccommodation == 'Owned with a mortgage'}
+      - "cb_private_rental": ${ MJFaccommodation == 'Private rental'}
+      - "cb_residential_park": ${ MJFaccommodation == 'Residential park'}
+      - "cb_sleeping_rough": ${ MJFaccommodation == 'Sleeping rough'}
+      - "cb_supportive": ${ MJFaccommodation == 'Supportive'}
+      - "cb_transitional": ${ MJFaccommodation == 'Transitional'}
+      - "Postcode": ${str(MJFpostcode)}
+      - "Suburb": ${MJFsuburb}
+      - "cb_eval_yes": ${ MJFwilling_contact == True}
+      - "cb_eval_no": ${MJFwilling_contact == False}
+      - "Email": ${ MJFcontact_email }
+      - "Phone": ${ MJFcontact_phone }
