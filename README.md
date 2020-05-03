@@ -1,8 +1,14 @@
-# docassemble.ALRMFinancialCounsellingForm
+# Wyatt - ALRM Financial Counselling Consent Form
 
-A docassemble extension.
+A Docassemble interview to automate the preparation of a this form.
 
-## Author
+Currently this app:
 
-Mark Ferraretto, mark@ferraretto.com
+- asks the user the questions on the form
+- populates a PDF with the supplied answers
+- makes PDF available for download and/or email
 
+Future versions will:
+
+- record interviews in a database for reporting purposes
+- allow for bulk imports of data into the database
