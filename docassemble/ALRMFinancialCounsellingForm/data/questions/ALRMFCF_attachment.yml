@@ -17,6 +17,7 @@ attachment:
       - "cb_c0_yes": ${ clients[0].concession_card == True }
       - "cb_c0_no": ${ clients[0].concession_card == False }
       - "Text11": ${ clients[0].income_type }
+      - "incomePrimary" : ${ clients[0].annual_income }
       - "cb_g1_male": ${ partner.gender == 'male' }
       - "cb_g1_female": ${ partner.gender == 'female' }
       - "cb_g1_other": ${ partner.gender == 'other' }
@@ -28,6 +29,7 @@ attachment:
       - "cb_c1_yes": ${ partner.concession_card == True }
       - "cb_c1_no": ${ partner.concession_card == False }
       - "Text10": ${ partner.income_type }
+      - "incomeSecondary" : ${ partner.annual_income }
       - "Text22": ${ str(MJFnum_children)}
       - "cb_boarding": ${ MJFaccommodation == 'Boarding'}
       - "cb_community_housing": ${ MJFaccommodation == 'Community housing'}
@@ -46,3 +48,4 @@ attachment:
       - "cb_eval_no": ${MJFwilling_contact == False}
       - "Email": ${ PDFcontact_email }
       - "Phone": ${ PDFcontact_phone }
+      - "referredBy" : ${ MJFreferred_by }
