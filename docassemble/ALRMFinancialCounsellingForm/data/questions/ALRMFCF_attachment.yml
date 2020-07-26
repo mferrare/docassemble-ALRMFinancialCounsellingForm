@@ -49,3 +49,10 @@ attachment:
       - "Email": ${ PDFcontact_email }
       - "Phone": ${ PDFcontact_phone }
       - "referredBy" : ${ MJFreferred_by }
+      - "dateStamp" : ${ format_date(today(), format="dd MMM YYYY")}
+      - "financialCounsellorName" : ${ PDFfinCName }
+      - "applicant1Signature" : ${ PDFapp1Sig }
+      - "applicant1SigDate"   : ${ PDFapp1SigDate }
+      - "applicant2Signature" : ${ PDFapp2Sig }
+      - "applicant2SigDate"   : ${ PDFapp2SigDate }
+      - "counsellorSignature" : ${ PDFfinCSig }

@@ -2,6 +2,7 @@
 objects:
   - clients: DAList.using(object_type=Individual)
   - partner: Individual
+  - finCounsellor: Individual
 ---
 # Client 1 on the form
 question: Client ${ i + 1 } Personal Information
@@ -56,13 +57,13 @@ terms:
 # Ask client 1 (clients[0]) if they have a partner
 question: Second applicant question
 subquestion: |
-  ${ clients[0].name }, is there someone else applying with you?
+  **${ clients[0].name }**, is there someone else applying with you?
 fields:
   - no label: clients[0].has_partner
     datatype: yesnoradio
 ---
 # Ask client 2 what is their relationship to client 1
-question: Relationship to ${ clients[i-1].name }
+question: Your relationship to **${ clients[i-1].name }**
 subquestion: |
   Please indicate your relationship to ${ clients[i-1].name }
 fields:
@@ -119,7 +120,12 @@ question: Financial Counsellor
 subquestion: |
   If you know the name of your financial counsellor, please enter it here
 fields:
-  - no label: MJFfinancial_counsellor_name
+  - Do you know the name of your financial counsellor?: MJFknows_finC
+    datatype: yesnoradio
+  - Please enter the name of your financial counsellor here: finCounsellor.name
+    show if:
+      variable: MJFknows_finC
+      is: True
 ---
 # Get the referral and store in a temp variable
 question: Referral
@@ -136,10 +142,12 @@ fields:
       variable: MJFis_referred
       is: 'Somebody referred me to this service'
 ---
-# and populate the PDF variable here
-code: |
-  if MJFis_referred == 'Somebody referred me to this service':
-    MJFreferred_by = MJFreferrer
-  else:
-    MJFreferred_by = 'Self-referral'
+# Get the Applicants' Signature
+generic object: Individual
+question: Signature
+subquestion: |
+  **${ x.name }**, please sign this form.
+signature: x.signature
+under:
+  ${ x.name }
 ---

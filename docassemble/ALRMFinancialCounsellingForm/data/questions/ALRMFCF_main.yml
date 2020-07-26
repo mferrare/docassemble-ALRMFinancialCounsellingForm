@@ -1,18 +1,8 @@
-default screen parts:
-  post: |
-    <div style="display: flex; height: 200px; align-items: flex-end; flex-direction: row-reverse">
-    <div style="margin: 5px"><img src="https://staff.flinders.edu.au/etc.clientlibs/flinders/clientlibs/clientlib-site/resources/images/flinderuni_main_logo_black.png" height="40">
-    </div>
-    <div style="margin: 5px; text-align: center">
-    <cite><small><i>
-    Developed by Flinders University in collaboration with ALRM
-    </i></small></cite>
-    </div>
-    </div>
 ---
 include:
   - ALRMFCF_questions.yml
   - ALRMFCF_attachment.yml
+  - ALRMFCF_code.yml
 ---
 mandatory: True
 question: Wyatt - ALRM
@@ -51,19 +41,17 @@ buttons:
     url: https://www.alrm.org.au
   - Restart: restart
 ---
-# We populate partner details using client[1] so we can re-use
-# the question block but we store the output in partner
-code: |
-  if clients[0].has_partner:
-    partner = clients[1]
-  else:
-    partner = DAEmpty()
+# Flinders attribution
+default screen parts:
+  post: |
+    <div style="display: flex; height: 200px; align-items: flex-end; flex-direction: row-reverse">
+    <div style="margin: 5px"><img src="https://staff.flinders.edu.au/etc.clientlibs/flinders/clientlibs/clientlib-site/resources/images/flinderuni_main_logo_black.png" height="40">
+    </div>
+    <div style="margin: 5px; text-align: right">
+    <cite><small><i>
+    Developed by Flinders University in collaboration with ALRM
+    </i></small></cite>
+    </div>
+    </div>
 ---
-# Deal with when contact details are not selected
-code: |
-  if MJFwilling_contact:
-    PDFcontact_email = MJFcontact_email
-    PDFcontact_phone = MJFcontact_phone
-  else:
-    PDFcontact_email = ''
-    PDFcontact_phone = ''
+  

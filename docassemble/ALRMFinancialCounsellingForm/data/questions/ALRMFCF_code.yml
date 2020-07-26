@@ -1,0 +1,61 @@
+---
+# We populate partner details using client[1] so we can re-use
+# the question block but we store the output in partner
+code: |
+  if clients[0].has_partner:
+    partner = clients[1]
+  else:
+    partner = DAEmpty()
+---
+# Deal with when contact details are not selected
+code: |
+  if MJFwilling_contact:
+    PDFcontact_email = MJFcontact_email
+    PDFcontact_phone = MJFcontact_phone
+  else:
+    PDFcontact_email = ''
+    PDFcontact_phone = ''
+---
+# Populate PDF Referral variable
+code: |
+  if MJFis_referred == 'Somebody referred me to this service':
+    MJFreferred_by = MJFreferrer
+  else:
+    MJFreferred_by = 'Self-referral'
+---
+# Populate Fin Counsellor variable
+code: |
+  if MJFknows_finC:
+    # Set the name of the financial counsellor
+    PDFfinCName = finCounsellor.name
+  else:
+    PDFfinCName = ''
+---
+# Get the signatures.  We append the finCounsellor to
+# the end of the clients DAList so we can use the one
+# question block.  There will always be at least one
+# signature - that of clients[0].
+code: |
+  PDFapp1Sig = clients[0].signature
+  PDFapp1SigDate = format_date(today(), format="dd MMM YYYY")
+---
+# If we have a partner, then their signature is clients[1],
+# otherwise use DAEmpty()
+code: |
+  if clients[0].has_partner:
+    PDFapp2Sig = clients[1].signature
+    PDFapp2SigDate = format_date(today(), format="dd MMM YYYY")
+  else:
+    PDFapp2SigDate = DAEmpty()
+    PDFapp2Sig = DAEmpty()
+---
+# Finally, we manage the financial counsellor's signature
+# If we know the finC's name, we can assume they are present
+# to sign.  If they are, then we append the finC to the end
+# of clients (so we can use the same question block)
+code: |
+  if MJFknows_finC:
+    PDFfinCSig = finCounsellor.signature
+  else:
+    PDFfinCSig = DAEmpty()
+---
