@@ -1,0 +1,33 @@
+modules:
+  .connectToMicrosoftGraph
+---
+objects:
+  - MSgraph: MicrosoftGraph.using(url_args=url_args)
+---
+mandatory: True
+question: First screen
+subquestion: |
+  Getting the spreadsheet.
+  
+  Do you want to log out
+yesno: do_logout
+---
+mandatory: True
+question: |
+  Here is some data
+subquestion: |
+  Logged out: ${ logged_out }
+
+  <code>
+  ${MSgraph.test()}
+  </code>
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+code: |
+  if do_logout:
+    logged_out = MSgraph.logout()
+  else:
+    logged_out = 'Not logging out'
+---
